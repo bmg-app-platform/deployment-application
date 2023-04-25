@@ -1,24 +1,19 @@
 replicaCount: 4
-
 image:
   repository: porrametp/demo-application
   pullPolicy: IfNotPresent
-  tag: main
+  tag: sha-5a334a9
   secretName: ibmcr-pull-image
-
 imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-
+nameOverride: ''
+fullnameOverride: ''
 service:
   type: ClusterIP
   port: 9090
-
 ingress:
   enabled: true
   annotations: {}
   tls: []
-
 resources:
   limits:
     cpu: 100m
