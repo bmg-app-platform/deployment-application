@@ -1,0 +1,19 @@
+apiversion: argoproj.io/v1alpha1
+kind: Application
+metadata:  
+  name: demo-application
+spec:  
+  destination:      
+    namespace: demo-application    
+    server: 'https://kubernetes.default.svc'  
+  source:    
+    path: demo-python-app    
+    repoURL: 'https://github.com/bmg-app-platform/deployment-application.git'    
+    targetRevision: HEAD  
+    project: default  
+  syncPolicy:    
+    automated:      
+      prune: true      
+      selfHeal: true    
+    syncOptions:      
+      - CreateNamespace=true

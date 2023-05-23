@@ -1,0 +1,36 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ template "demo-python-app.name" . }}
+  labels:
+    app: {{ template "demo-python-app.name" . }}
+    chart: {{ template "demo-python-app.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ template "demo-python-app.fullname" . }}
+  minReplicas: {{ .Values.replicaCount.minCount }}
+  maxReplicas: {{ .Values.replicaCount.maxCount }}
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: {{ .Values.hpa.stabilizationUp }}
+      policies:
+      - type: {{ .Values.hpa.policiesType }}
+        value: {{ .Values.hpa.values }}
+        periodSeconds: {{ .Values.hpa.stabilizationUp }}
+    scaleDown:
+      stabilizationWindowSeconds: {{ .Values.hpa.stabilizationDown }}
+      policies:
+      - type: {{ .Values.hpa.policiesType }}
+        value: {{ .Values.hpa.values }}
+        periodSeconds: {{ .Values.hpa.stabilizationDown }}
+  metrics:
+  - type: Resource
+    resource:
+      name: {{ .Values.hpa.name }}
+      target:
+        type: {{ .Values.hpa.type }}
+        averageUtilization: {{ .Values.hpa.average }}

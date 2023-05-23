@@ -1,4 +1,6 @@
-replicaCount: 4
+replicaCount: 
+  minCount: 4
+  maxCount: 8
 image:
   repository: porrametp/demo-application
   pullPolicy: IfNotPresent
@@ -8,7 +10,7 @@ imagePullSecrets: []
 nameOverride: ''
 fullnameOverride: ''
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 9090
 ingress:
   enabled: true
@@ -21,3 +23,11 @@ resources:
   requests:
     cpu: 50m
     memory: 400Mi
+hpa:
+  values: 1
+  policiesType: Pods
+  stabilizationUp: 30
+  stabilizationDown: 900
+  name: cpu
+  type: Utilization
+  average: 55
