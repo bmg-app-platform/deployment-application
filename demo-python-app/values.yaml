@@ -1,10 +1,10 @@
-replicaCount: 
+replicaCount:
   minCount: 2
   maxCount: 4
 image:
   repository: porrametp/demo-application
   pullPolicy: IfNotPresent
-  tag: sha-49c3151
+  tag: sha-c554ee1
   secretName: ibmcr-pull-image
 imagePullSecrets: []
 nameOverride: ''
