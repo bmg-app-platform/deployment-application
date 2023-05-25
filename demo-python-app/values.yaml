@@ -10,7 +10,7 @@ imagePullSecrets: []
 nameOverride: ''
 fullnameOverride: ''
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 9090
 ingress:
   enabled: true
