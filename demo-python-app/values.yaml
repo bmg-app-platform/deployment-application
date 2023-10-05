@@ -4,7 +4,7 @@ replicaCount:
 image:
   repository: porrametp/demo-application
   pullPolicy: IfNotPresent
-  tag: sha-e85ccae
+  tag: sha-dc03a60
   secretName: ibmcr-pull-image
 imagePullSecrets: []
 nameOverride: ''
